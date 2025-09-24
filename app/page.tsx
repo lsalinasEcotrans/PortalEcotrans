@@ -1,102 +1,131 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ArrowRight, Users, Car, Shield, Settings } from "lucide-react";
+import Logo from "@/public/preload.png";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function HomePage() {
+  const portals = [
+    {
+      title: "Portal Conductores",
+      description: "Acceso exclusivo para conductores registrados",
+      url: "/conductores",
+      icon: Car,
+      color: "bg-primary hover:bg-primary/90",
+      backgroundImage: "/press-start-button-car-start-vehicle.jpg",
+    },
+    {
+      title: "Portal Pasajeros",
+      description: "Servicios y gestión para pasajeros",
+      url: "/pasajeros",
+      icon: Users,
+      color: "bg-accent hover:bg-accent/90",
+      backgroundImage: "/smiling-woman-traveling-by-car.jpg",
+    },
+    {
+      title: "Intranet",
+      description: "Sistema interno corporativo",
+      url: "/intranet",
+      icon: Shield,
+      color: "bg-primary/80 hover:bg-primary/70",
+      backgroundImage: "/office-intranet.jpg",
+    },
+    {
+      title: "Admin Convenios",
+      description: "Administración de convenios empresariales",
+      url: "/admin.convenios",
+      icon: Settings,
+      color: "bg-accent/90 hover:bg-accent/80",
+      backgroundImage: "/admin-contracts.jpg",
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <main className="flex-1 py-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Nuestros Portales
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+              Selecciona el portal que necesitas para acceder a los servicios
+              específicos
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {portals.map((portal, index) => {
+              return (
+                <Card
+                  key={index}
+                  className="group relative overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 transform"
+                  style={{
+                    backgroundImage: `url(${portal.backgroundImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-black/30 transition-all duration-500"></div>
+
+                  <div className="relative z-10 p-8 h-full flex flex-col">
+                    <h4 className="text-xl font-semibold text-white mb-3 text-balance drop-shadow-lg">
+                      {portal.title}
+                    </h4>
+
+                    <p className="text-white/90 text-sm leading-relaxed mb-6 flex-grow drop-shadow-md">
+                      {portal.description}
+                    </p>
+
+                    <Button
+                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 bg-white/90 hover:bg-white text-black hover:scale-105 shadow-lg"
+                      variant="outline"
+                      asChild
+                    >
+                      <a
+                        href={portal.url}
+                        className="flex items-center justify-center gap-2"
+                      >
+                        Acceder
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </a>
+                    </Button>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer
+        className="bg-accent  py-8 mt-auto text-white"
+        style={{ backgroundColor: "#000000ff" }}
+      >
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+              <h4 className="font-bold text-lg font-ecotrans inline-flex items-center mb-2">
+                <Image
+                  src={Logo}
+                  alt="Ecotrans Logo"
+                  className="inline-block mr-2"
+                  width={24}
+                  height={24}
+                />
+                <span className="text-verde">Eco</span>trans
+              </h4>
+
+              <p className="text-sm">Soluciones de transporte.</p>
+            </div>
+            <div className="text-sm text-center md:text-right">
+              <p>contacto@ecotranschile.cl</p>
+              <p>© 2025 Ecotrans Chile. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
