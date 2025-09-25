@@ -8,12 +8,13 @@ export default function LoginPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
-        <div className="flex justify-center md:justify-start font-ecotrans">
-          <div className="text-primary-foreground flex items-center justify-center">
-            <Image src={Logo} className="size-6" alt="Ecotrans Logo" />
-          </div>
-          <span className="text-verde">Eco</span>trans
+        <div className="flex items-center justify-center md:justify-start font-ecotrans">
+          <Image src={Logo} alt="Logo Ecotrans" width={48} height={48} />
+          <span className="ml-2 h1" style={{ fontSize: "30px" }}>
+            <span className="text-verde">Eco</span>trans
+          </span>
         </div>
+
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
             <LoginForm />
